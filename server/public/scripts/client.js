@@ -31,10 +31,29 @@ function getKoalas(){
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
   
-} // end getKoalas
+} // end  getKoalas
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
- 
-}
+  // ajax call to server to get koalas - ADAM HERE
+    const newKoala = {
+      name: $('#nameIn').val(),
+      age: $('#ageIn').val(),
+      gender: $('#genderIn').val(),
+      transferStatus: $('#readyForTransferIn').val()
+      notes: $('#notesIn').val(),
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/koalas',
+      data: newKoala
+    }).then((response) => {
+      console.log('POST /koalas succeeded')
+      $('#nameIn').val('')
+      $('#ageIn').val('')
+      $('#genderIn').val('')
+      $('#readyForTransferIn').val('')
+      $('#notesIn').val('')
+      getKoalas();
+    });
+  }
