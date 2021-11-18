@@ -25,18 +25,57 @@ function setupClickListeners() {
       readyForTransfer: 'Yes/No',
       notes: 'notes',
     };
-        // call saveKoala with the new obejct
+
+    // call saveKoala with the new object
     saveKoala( koalaToSend );
   }; 
 
 
 function getKoalas(){
-  console.log( 'in getKoalas' );
+  $.ajax({
+    type: 'GET',
+    url: '/koalas'
+  }).then ((response)=> {
+    $('#viewKoalas').empty();
+    console.log('GET /koalas response', response);
+    for (let koalas of response) {
+      $('#viewKoalas').append(`
+        <tr>
+          <td>{$koalas.name}</td>
+          <td>{$koalas.gender}</td>
+          <td>{$koalas.ready_to_transfer}</td>
+          <td>{$koalas.notes}</td>
+          <td><button class="transferButton">Ready For Transfer</button></td>
+        </tr>
+      `);
+    }
+  })
   // ajax call to server to get koalas
   
-} // end getKoalas
+} // end  getKoalas
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
-}
+
+  // ajax call to server to get koalas - ADAM HERE
+    const newKoala = {
+      name: $('#nameIn').val(),
+      age: $('#ageIn').val(),
+      gender: $('#genderIn').val(),
+      transferStatus: $('#readyForTransferIn').val()
+      notes: $('#notesIn').val(),
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/koalas',
+      data: newKoala
+    }).then((response) => {
+      console.log('POST /koalas succeeded')
+      $('#nameIn').val('')
+      $('#ageIn').val('')
+      $('#genderIn').val('')
+      $('#readyForTransferIn').val('')
+      $('#notesIn').val('')
+      getKoalas();
+    });
+  }
