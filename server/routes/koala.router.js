@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
       newKoala.name,
       newKoala.age,
       newKoala.gender,
-      newKoala.trasferStatus,
+      newKoala.transferStatus,
       newKoala.notes
     ];
     pool.query(sqlText, sqlValues)
