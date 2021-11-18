@@ -5,7 +5,18 @@ const router = express.Router();
 
 
 // GET
-
+router.get( '/', (req, res) => {
+    console.log('in GET');
+    const sqlText = 'SELECT * FROM "koalas" ORDER BY "name" DESC;';
+    pool.query( sqlText )
+        .then( dbResult => {
+        console.log(`${dbResult.rows.length} rows to send.`)
+        res.send(dbResult.rows );
+    }).catch( dbErr => {
+        console.error(dbErr);
+        res.sendStatus( 500 );
+    });
+});
 
 
 // POST - HERE ADAM saveKoala

@@ -55,8 +55,8 @@ function getKoalas(){
   
 } // end  getKoalas
 
-function saveKoala( newKoala ){
-  console.log( 'in saveKoala', newKoala );
+function saveKoala(){
+  console.log( 'in saveKoala' );
 
   // ajax call to server to get koalas - ADAM HERE
     const newKoala = {
