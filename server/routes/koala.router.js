@@ -49,7 +49,31 @@ router.post('/', (req, res) => {
 
 
 // PUT
+router.put('/:id', (req, res) => {
+    console.log('req.params', req.params);
+    console.log('req.body', req.body);
+    const koalaToUpdate = req.params.id;
+    let currentStatus = req.body.transferStatus;
+    currentStatus = true;
+    const sqlText = `
+    UPDATE "koalas"
+        SET "ready_to_transfer"=$1
+        WHERE "id"=$2;
+    `;
+    const sqlValues = [
+    currentStatus,
+    koalaToUpdate
+    ]
 
+    pool.query(sqlText, sqlValues)
+    .then((dbResult) => {
+        res.sendStatus(200);
+    })
+    .catch((dbErr) => {
+        console.error(dbErr);
+        res.sendStatus(500);
+    })
+});
 
 // DELETE
 

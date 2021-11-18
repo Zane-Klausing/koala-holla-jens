@@ -14,6 +14,7 @@ function onReady(){
 function setupClickListeners() {
   console.log('in setupClickListeners')
   $('#addButton').on('click', saveKoala);
+  $('#viewKoalas').on('click', '.transferButton', shipKoala)
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
@@ -29,6 +30,7 @@ function getKoalas(){
     $('#viewKoalas').empty();
     console.log('GET /koalas response', response);
     for (let koalas of response) {
+      if (koalas.ready_to_transfer === false){
       $('#viewKoalas').append(`
         <tr>
           <td>${koalas.name}</td>
@@ -36,9 +38,21 @@ function getKoalas(){
           <td>${koalas.age}</td>
           <td>${koalas.ready_to_transfer}</td>
           <td>${koalas.notes}</td>
-          <td><button class="transferButton" data-id="${koalas.id}">Ready For Transfer</button></td>
+          <td><button class="transferButton" data-id="${koalas.id}" data-status="${koalas.ready_to_transfer}">Ready For Transfer</button></td>
         </tr>
       `);
+      }
+      else{
+        $('#viewKoalas').append(`
+        <tr>
+          <td>${koalas.name}</td>
+          <td>${koalas.gender}</td>
+          <td>${koalas.age}</td>
+          <td>${koalas.ready_to_transfer}</td>
+          <td>${koalas.notes}</td>
+        </tr>
+      `);
+      }
     }
   })
   // ajax call to server to get koalas
@@ -69,4 +83,21 @@ function saveKoala(){
       $('#notesIn').val('')
       getKoalas();
     });
+  }
+
+  function shipKoala() {
+    const koalaToShip = $(this).data('id');
+    const currentStatus = $(this).data('status');
+  
+    console.log('koalaToShip', koalaToShip);
+    console.log('currentStatus', currentStatus);
+    $.ajax({
+      type: 'PUT',
+      url: `/koalas/${koalaToShip}`,
+      data: { transferStatus: currentStatus }
+    }).then((res) => {
+      getKoalas();
+    }).catch((err) => {
+      console.error(err);
+    })
   }
