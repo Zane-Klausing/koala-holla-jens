@@ -48,6 +48,7 @@ function getKoalas(){
 } // end  getKoalas
 
 function saveKoala(){
+  console.log( 'in saveKoala' );
   // ajax call to server to get koalas - ADAM HERE
     const newKoala = {
       name: $('#nameIn').val(),
