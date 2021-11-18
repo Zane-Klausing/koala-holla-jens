@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const pool = require('../modules/pool.js');
 // DB CONNECTION
 
 
@@ -42,5 +42,6 @@ router.post('/', (req, res) => {
 
 
 // DELETE
+
 
 module.exports = router;
