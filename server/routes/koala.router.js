@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../modules/pool.js');
 // DB CONNECTION
-
+const pool = require('../routes/pool');
 
 // GET
 router.get( '/', (req, res) => {
@@ -21,7 +20,7 @@ router.get( '/', (req, res) => {
 
 // POST - HERE ADAM saveKoala
 router.post('/', (req, res) => {
-    console.log('POST /koalas');
+    console.log('POST /koala');
     console.log('req.body:', req.body);
     const newKoala = req.body;
     const sqlText = `

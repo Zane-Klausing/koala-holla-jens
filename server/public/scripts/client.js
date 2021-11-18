@@ -4,22 +4,20 @@ $( document ).ready(onReady);
 
 function onReady(){
   console.log( 'JQ' );
-  // Establish Click Listeners
-  setupClickListeners()
-  // load existing koalas on page load
   getKoalas();
+  // Establish Click Listeners
+  setupClickListeners();
+  // load existing koalas on page load
 
 }; // end doc ready
 
 function setupClickListeners() {
   console.log('in setupClickListeners')
-  $('#addButton').on('click', saveKoala());
-    console.log( `Clicked addButton`)
+  $('#addButton').on('click', saveKoala);
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
     // call saveKoala with the new object
-    saveKoala();
   }; 
 
 
