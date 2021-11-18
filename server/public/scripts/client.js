@@ -41,11 +41,12 @@ function getKoalas(){
     for (let koalas of response) {
       $('#viewKoalas').append(`
         <tr>
-          <td>{$koalas.name}</td>
-          <td>{$koalas.gender}</td>
-          <td>{$koalas.ready_to_transfer}</td>
-          <td>{$koalas.notes}</td>
-          <td><button class="transferButton">Ready For Transfer</button></td>
+          <td>${koalas.name}</td>
+          <td>${koalas.gender}</td>
+          <td>${koalas.age}</td>
+          <td>${koalas.ready_to_transfer}</td>
+          <td>${koalas.notes}</td>
+          <td><button class="transferButton" data-id="${koalas.id}">Ready For Transfer</button></td>
         </tr>
       `);
     }
@@ -62,7 +63,7 @@ function saveKoala( newKoala ){
       name: $('#nameIn').val(),
       age: $('#ageIn').val(),
       gender: $('#genderIn').val(),
-      transferStatus: $('#readyForTransferIn').val()
+      transferStatus: $('#readyForTransferIn').val(),
       notes: $('#notesIn').val(),
     }
     $.ajax({
