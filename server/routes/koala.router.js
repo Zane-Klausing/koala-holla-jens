@@ -7,6 +7,7 @@ const koalaRouter = express.Router();
 // GET
 
 
+
 // POST - HERE ADAM saveKoala
 router.post('/', (req, res) => {
     console.log('POST /koalas');
@@ -34,7 +35,8 @@ router.post('/', (req, res) => {
         console.error(dbErr);
         res.sendStatus(500);
     });
-});
+}); 
+
 
 // PUT
 
