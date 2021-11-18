@@ -1,0 +1,27 @@
+body {
+    background-color: white;
+}
+
+img {
+    width: 100px;
+    border: 1em solid white;
+    display:inline-block;
+}
+
+header{
+    background-color: cadetblue;
+    padding: 1em;
+    font-family: sans-serif;
+}
+
+td, th{
+
+    border-collapse: collapse;
+    padding: 1em;
+    margin: 1em;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+td{
+    border-bottom: 2px rgb(73, 68, 68)
+}
