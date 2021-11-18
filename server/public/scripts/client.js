@@ -14,20 +14,12 @@ function onReady(){
 function setupClickListeners() {
   console.log('in setupClickListeners')
   $('#addButton').on('click', saveKoala());
-    console.log( `Clicked addButton sending ${koalaToSend}`)
+    console.log( `Clicked addButton`)
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
-    let koalaToSend = {
-      name: 'name',
-      age: 'number',
-      gender: 'gender',
-      readyForTransfer: 'Yes/No',
-      notes: 'notes',
-    };
-
     // call saveKoala with the new object
-    saveKoala( koalaToSend );
+    saveKoala();
   }; 
 
 
@@ -57,7 +49,6 @@ function getKoalas(){
 
 function saveKoala(){
   console.log( 'in saveKoala' );
-
   // ajax call to server to get koalas - ADAM HERE
     const newKoala = {
       name: $('#nameIn').val(),
@@ -66,6 +57,7 @@ function saveKoala(){
       transferStatus: $('#readyForTransferIn').val(),
       notes: $('#notesIn').val(),
     }
+    console.log( 'in saveKoala', newKoala );
     $.ajax({
       type: 'POST',
       url: '/koalas',
